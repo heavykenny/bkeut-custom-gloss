@@ -32,7 +32,7 @@ export function GlossCustomizer() {
   const handleCheckout = () => {
     const payload = {
       brand: "BKEUT&Co. Lipgloss",
-      engraving: text || "(no text)",
+      label: text || "(no text)",
       shade: shade.name,
       shadeHex: shade.hex,
       occasion,
@@ -59,7 +59,7 @@ export function GlossCustomizer() {
           <span className="italic text-accent">Shine.</span>
         </h1>
         <p className="text-lg max-w-md mb-12 leading-relaxed text-foreground/75">
-          Bespoke high-viscosity gloss in rich chocolate tones, personalized for your most indulgent moments. Engraved by hand, poured for you.
+          Bespoke high-viscosity gloss in rich chocolate tones, personalized for your most indulgent moments. Labeled by hand, poured for you.
         </p>
 
         <div className="bg-card ring-1 ring-foreground/5 rounded-2xl p-6 md:p-8 space-y-8 shadow-[0_30px_80px_-40px_rgba(62,36,24,0.25)]">
@@ -83,7 +83,7 @@ export function GlossCustomizer() {
             </div>
           </div>
 
-          {/* Engraving */}
+          {/* Label */}
           <div>
             <label className="block text-[10px] uppercase tracking-[0.2em] font-bold mb-3 text-foreground/60">2. Label your text</label>
             <div className="relative">
@@ -195,7 +195,7 @@ export function GlossCustomizer() {
               loading="lazy"
               className="relative w-full h-full object-contain drop-shadow-[0_40px_60px_rgba(62,36,24,0.35)]"
             />
-            {/* Engraved label */}
+            {/* Label */}
             <div
               className="absolute flex items-center justify-center pointer-events-none"
               style={{ left: "40%", right: "40%", top: "40%", height: "22%" }}
