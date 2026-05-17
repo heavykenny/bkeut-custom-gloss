@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import tubeImage from "@/assets/lipgloss-tube.png";
 
 const SHADES = [
   { name: "Ganache", hex: "#3E2418" },
@@ -170,20 +171,38 @@ export function GlossCustomizer() {
       {/* Live preview tube */}
       <div className="relative animate-reveal" style={{ animationDelay: "200ms" }}>
         <div className="sticky top-28 flex justify-center">
-          <div className="relative w-44 md:w-56 h-[520px] md:h-[640px] bg-card rounded-full ring-1 ring-foreground/10 shadow-2xl overflow-hidden flex flex-col animate-shimmer">
-            <div className="h-[28%] bg-foreground flex items-center justify-center">
-              <div className="w-1 h-24 bg-accent/40 rounded-full" />
-            </div>
+          <div className="relative w-[280px] md:w-[360px] h-[560px] md:h-[700px]">
+            {/* Tinted liquid layer — sits behind the tube image and shows through the glass */}
             <div
-              className="flex-1 relative flex items-center justify-center transition-colors duration-700"
+              aria-hidden
+              className="absolute transition-colors duration-700"
               style={{
-                background: `linear-gradient(180deg, ${shade.hex}f2 0%, ${shade.hex} 60%, ${shade.hex}dd 100%)`,
+                left: "38%",
+                right: "38%",
+                top: "32%",
+                bottom: "8%",
+                background: `linear-gradient(180deg, ${shade.hex} 0%, ${shade.hex}e6 50%, ${shade.hex} 100%)`,
+                borderRadius: "40% 40% 45% 45% / 8% 8% 14% 14%",
+                mixBlendMode: "multiply",
+                filter: "blur(2px)",
               }}
+            />
+            <img
+              src={tubeImage}
+              alt="BKEUT&Co. lip gloss tube with silver cap"
+              width={1024}
+              height={1024}
+              loading="lazy"
+              className="relative w-full h-full object-contain drop-shadow-[0_40px_60px_rgba(62,36,24,0.35)] animate-shimmer"
+            />
+            {/* Engraved label */}
+            <div
+              className="absolute flex items-center justify-center pointer-events-none"
+              style={{ left: "40%", right: "40%", top: "40%", height: "22%" }}
             >
-              <span className="absolute -rotate-90 font-serif italic font-black whitespace-nowrap tracking-widest text-3xl md:text-4xl text-white/30 uppercase">
-                {text || "Your text here"}
+              <span className="font-serif italic text-foreground/80 text-center text-sm md:text-base leading-tight px-1 break-words">
+                {text || "Your text"}
               </span>
-              <div className="absolute top-6 left-6 w-1 h-32 bg-white/25 blur-[2px] rounded-full" />
             </div>
           </div>
           <div className="absolute -bottom-12 -right-8 size-40 bg-accent/20 rounded-full blur-3xl -z-10" />
