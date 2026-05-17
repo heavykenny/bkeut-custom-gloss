@@ -193,7 +193,7 @@ export function GlossCustomizer() {
               width={1024}
               height={1024}
               loading="lazy"
-              className="relative w-full h-full object-contain drop-shadow-[0_40px_60px_rgba(62,36,24,0.35)] animate-shimmer"
+              className="relative w-full h-full object-contain drop-shadow-[0_40px_60px_rgba(62,36,24,0.35)]"
             />
             {/* Engraved label */}
             <div
