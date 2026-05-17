@@ -9,14 +9,14 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "BKEUT&Co. Lipgloss — Bespoke Engraved Gloss" },
+      { title: "BKEUT&Co. Lipgloss — Bespoke Labeled Gloss" },
       {
         name: "description",
         content:
-          "Customizable luxury lip gloss by BKEUT&Co. Personalize your shade and engraving for birthdays, weddings, quotes, and every indulgent moment.",
+          "Customizable luxury lip gloss by BKEUT&Co. Personalize your shade and labeling for birthdays, weddings, quotes, and every indulgent moment.",
       },
-      { property: "og:title", content: "BKEUT&Co. Lipgloss — Bespoke Engraved Gloss" },
-      { property: "og:description", content: "Bespoke lip gloss, engraved and poured for you." },
+      { property: "og:title", content: "BKEUT&Co. Lipgloss — Bespoke Labeled Gloss" },
+      { property: "og:description", content: "Bespoke lip gloss, labeled and poured for you." },
     ],
   }),
 });
@@ -62,7 +62,7 @@ function Marquee() {
 
 function HowItWorks() {
   const steps = [
-    { n: "01", t: "Define the sentiment", d: "Pick the occasion and engrave up to 14 characters that mean something to you." },
+    { n: "01", t: "Define the sentiment", d: "Pick the occasion and label up to 14 characters that mean something to you." },
     { n: "02", t: "Choose your shade", d: "Eight curated chocolate-to-nude tones — or request a custom pour just for you." },
     { n: "03", t: "Pay via Monzo", d: "Checkout in one tap with a secure Monzo link. Your booking lands instantly on our end." },
   ];
@@ -71,7 +71,7 @@ function HowItWorks() {
       <div className="max-w-7xl mx-auto">
         <p className="text-[11px] uppercase tracking-[0.3em] font-semibold text-muted-foreground mb-4">The Ritual</p>
         <h2 className="font-serif text-4xl md:text-5xl tracking-tight mb-16 max-w-2xl">
-          Three steps from <span className="italic">idea</span> to engraved keepsake.
+          Three steps from <span className="italic">idea</span> to labeled keepsake.
         </h2>
         <div className="grid md:grid-cols-3 gap-12">
           {steps.map((s) => (
