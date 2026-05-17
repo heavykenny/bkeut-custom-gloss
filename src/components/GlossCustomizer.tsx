@@ -85,7 +85,7 @@ export function GlossCustomizer() {
 
           {/* Engraving */}
           <div>
-            <label className="block text-[10px] uppercase tracking-[0.2em] font-bold mb-3 text-foreground/60">2. Engrave your text</label>
+            <label className="block text-[10px] uppercase tracking-[0.2em] font-bold mb-3 text-foreground/60">2. Label your text</label>
             <div className="relative">
               <input
                 type="text"
@@ -171,7 +171,7 @@ export function GlossCustomizer() {
       {/* Live preview tube */}
       <div className="relative animate-reveal" style={{ animationDelay: "200ms" }}>
         <div className="sticky top-28 flex justify-center">
-          <div className="relative w-[280px] md:w-[360px] h-[560px] md:h-[700px]">
+          <div className="relative w-[360px] md:w-[480px] h-[720px] md:h-[860px]">
             {/* Tinted liquid layer — sits behind the tube image and shows through the glass */}
             <div
               aria-hidden
