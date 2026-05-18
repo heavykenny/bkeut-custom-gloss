@@ -40,7 +40,7 @@ function Index() {
       <Nav onOpenBag={() => setBagOpen(true)} />
       <SocialStrip visible={!onReview} />
       <LayoutGroup>
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="popLayout">
           {onReview ? (
             <ReviewScreen key="review" />
           ) : (

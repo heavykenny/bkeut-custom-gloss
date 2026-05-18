@@ -63,7 +63,7 @@ export function ReviewScreen() {
           onIndexChange={setPreviewIndex}
         />
         <OrderSummary
-          items={orderedItems}
+          items={items}
           subtotal={subtotal}
           confirmed={confirmed}
           onPay={handlePay}
