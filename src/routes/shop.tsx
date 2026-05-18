@@ -6,7 +6,6 @@ import { SocialStrip } from "../components/layout/SocialStrip";
 import { ProductTile } from "../components/shop/ProductTile";
 import { PRODUCTS } from "../data/products";
 import { STAGGER } from "../lib/motion";
-import tubeImage from "../assets/lipgloss-tube.png";
 
 export const Route = createFileRoute("/shop")({
   component: ShopPage,
@@ -32,7 +31,7 @@ function ShopPage() {
           className="grid grid-cols-2 md:grid-cols-4 gap-6"
         >
           {PRODUCTS.map((p) => (
-            <ProductTile key={p.id} product={p} preview={p.id === "lipgloss" ? tubeImage : undefined} />
+            <ProductTile key={p.id} product={p} />
           ))}
         </motion.div>
       </section>

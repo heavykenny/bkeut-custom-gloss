@@ -6,16 +6,15 @@ import type { Product } from "../../data/products";
 
 type Props = {
   product: Product;
-  preview?: string; // optional image
 };
 
-export function ProductTile({ product, preview }: Props) {
+export function ProductTile({ product }: Props) {
   const isLive = product.href !== null;
   const body = (
     <motion.div variants={FADE_UP} className="space-y-3">
       <div className={`aspect-square rounded-xl bg-secondary flex items-center justify-center overflow-hidden ${isLive ? "" : "opacity-60"}`}>
-        {preview ? (
-          <img src={preview} alt={product.name} className="w-full h-full object-contain p-6" />
+        {product.previewImage ? (
+          <img src={product.previewImage} alt={product.name} className="w-full h-full object-contain p-6" />
         ) : (
           <span className="font-serif text-5xl text-foreground/30 italic">{product.name[0]}</span>
         )}
