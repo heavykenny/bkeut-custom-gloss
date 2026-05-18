@@ -59,7 +59,7 @@ export function GlossCustomizer() {
           <span className="italic text-accent">Shine.</span>
         </h1>
         <p className="text-lg max-w-md mb-12 leading-relaxed text-foreground/75">
-          Bespoke high-viscosity gloss in rich chocolate tones, personalized for your most indulgent moments. Labeled by hand, poured for you.
+          Bespoke high-viscosity gloss rich in colours, personalised for your most indulgent moments. Labeled by hand, poured for you.
         </p>
 
         <div className="bg-card ring-1 ring-foreground/5 rounded-2xl p-6 md:p-8 space-y-8 shadow-[0_30px_80px_-40px_rgba(62,36,24,0.25)]">
