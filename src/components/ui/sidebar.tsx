@@ -346,33 +346,25 @@ const SidebarInput = React.forwardRef<
 });
 SidebarInput.displayName = "SidebarInput";
 
-const SidebarHeader = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
-  ({ className, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        data-sidebar="header"
-        className={cn("flex flex-col gap-2 p-2", className)}
-        {...props}
-      />
-    );
-  },
-);
-SidebarHeader.displayName = "SidebarHeader";
+function createSidebarSection(side: "header" | "footer") {
+  const Component = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
+    ({ className, ...props }, ref) => {
+      return (
+        <div
+          ref={ref}
+          data-sidebar={side}
+          className={cn("flex flex-col gap-2 p-2", className)}
+          {...props}
+        />
+      );
+    },
+  );
+  Component.displayName = `Sidebar${side.charAt(0).toUpperCase() + side.slice(1)}`;
+  return Component;
+}
 
-const SidebarFooter = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
-  ({ className, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        data-sidebar="footer"
-        className={cn("flex flex-col gap-2 p-2", className)}
-        {...props}
-      />
-    );
-  },
-);
-SidebarFooter.displayName = "SidebarFooter";
+const SidebarHeader = createSidebarSection("header");
+const SidebarFooter = createSidebarSection("footer");
 
 const SidebarSeparator = React.forwardRef<
   React.ElementRef<typeof Separator>,
