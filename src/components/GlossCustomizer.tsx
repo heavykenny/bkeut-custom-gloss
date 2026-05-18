@@ -2,14 +2,14 @@ import { useMemo, useState } from "react";
 import tubeImage from "@/assets/lipgloss-tube.png";
 
 const SHADES = [
-  { name: "Black Truffle", hex: "#1F0F08" },
-  { name: "Dark Ganache", hex: "#2A140A" },
-  { name: "Espresso", hex: "#3A1C0E" },
-  { name: "Bittersweet", hex: "#4A2412" },
-  { name: "Cocoa", hex: "#5C2E18" },
-  { name: "Mocha", hex: "#6E3A1F" },
-  { name: "Praline", hex: "#7E4528" },
-  { name: "Caramel", hex: "#8E5331" },
+  { name: "Ganache", hex: "#3E2418" },
+  { name: "Cocoa", hex: "#5C3A2A" },
+  { name: "Praline", hex: "#8E533F" },
+  { name: "Caramel", hex: "#B07A5B" },
+  { name: "Toffee", hex: "#C2856D" },
+  { name: "Honey Nude", hex: "#E0B8A0" },
+  { name: "Champagne", hex: "#EBD0BD" },
+  { name: "Crystal", hex: "#F5E6E0" },
 ];
 
 const OCCASIONS = ["Birthday", "Wedding", "Bridesmaids", "Quote", "Just Because"];
