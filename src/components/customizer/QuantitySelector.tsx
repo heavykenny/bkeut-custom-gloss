@@ -18,11 +18,15 @@ export function QuantitySelector({ qty, onChange }: Props) {
           variant="ghost"
           size="sm"
           onClick={() => onChange(Math.max(1, qty - 1))}
+          aria-label="Decrease quantity"
           className="px-4 py-3 h-auto rounded-none rounded-l-lg"
         >
           −
         </Button>
-        <span className="px-5 py-3 font-mono border-x border-border min-w-[3rem] text-center text-sm">
+        <span
+          aria-live="polite"
+          className="px-5 py-3 font-mono border-x border-border min-w-[3rem] text-center text-sm"
+        >
           {String(qty).padStart(2, "0")}
         </span>
         <Button
@@ -30,6 +34,7 @@ export function QuantitySelector({ qty, onChange }: Props) {
           variant="ghost"
           size="sm"
           onClick={() => onChange(qty + 1)}
+          aria-label="Increase quantity"
           className="px-4 py-3 h-auto rounded-none rounded-r-lg"
         >
           +

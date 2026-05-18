@@ -18,10 +18,14 @@ export function LabelInput({ value, onChange }: Props) {
         <Input
           value={value}
           onChange={(e) => onChange(e.target.value.slice(0, MAX_LABEL_CHARS))}
+          maxLength={MAX_LABEL_CHARS}
           placeholder="e.g. Evelyn's Glow"
           className="bg-secondary border-border font-serif italic text-xl h-auto px-4 py-3"
         />
-        <span className="absolute right-4 top-1/2 -translate-y-1/2 font-mono text-[10px] text-foreground/40 pointer-events-none">
+        <span
+          aria-live="polite"
+          className="absolute right-4 top-1/2 -translate-y-1/2 font-mono text-[10px] text-foreground/40 pointer-events-none"
+        >
           {value.length}/{MAX_LABEL_CHARS}
         </span>
       </div>
