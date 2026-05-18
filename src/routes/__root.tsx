@@ -8,6 +8,8 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 
+import { BagProvider } from "../hooks/use-bag";
+
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
@@ -110,7 +112,9 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <BagProvider>
+        <Outlet />
+      </BagProvider>
     </QueryClientProvider>
   );
 }
