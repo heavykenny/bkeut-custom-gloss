@@ -181,9 +181,9 @@ export function GlossCustomizer() {
                 right: "41.5%",
                 top: "32.5%",
                 bottom: "7%",
-                background: `linear-gradient(180deg, ${shade.hex} 0%, ${shade.hex}e6 50%, ${shade.hex} 100%)`,
+                background: `linear-gradient(180deg, ${shade.hex} 0%, ${shade.hex} 100%)`,
                 borderRadius: "6% 6% 28% 28% / 2% 2% 8% 8%",
-                mixBlendMode: "multiply",
+                boxShadow: `inset 0 -30px 60px rgba(0,0,0,0.35), inset 0 20px 40px rgba(255,255,255,0.08)`,
               }}
             />
             <img
