@@ -177,14 +177,13 @@ export function GlossCustomizer() {
               aria-hidden
               className="absolute transition-colors duration-700"
               style={{
-                left: "38%",
-                right: "38%",
-                top: "32%",
-                bottom: "8%",
+                left: "41.5%",
+                right: "41.5%",
+                top: "32.5%",
+                bottom: "7%",
                 background: `linear-gradient(180deg, ${shade.hex} 0%, ${shade.hex}e6 50%, ${shade.hex} 100%)`,
-                borderRadius: "40% 40% 45% 45% / 8% 8% 14% 14%",
+                borderRadius: "6% 6% 28% 28% / 2% 2% 8% 8%",
                 mixBlendMode: "multiply",
-                filter: "blur(2px)",
               }}
             />
             <img
@@ -198,7 +197,7 @@ export function GlossCustomizer() {
             {/* Label */}
             <div
               className="absolute flex items-center justify-center pointer-events-none"
-              style={{ left: "40%", right: "40%", top: "40%", height: "22%" }}
+              style={{ left: "44.5%", right: "44.5%", top: "39%", height: "33%" }}
             >
               <span className="font-serif italic text-foreground/80 text-center text-sm md:text-base leading-tight px-1 break-words">
                 {text || "Your text"}
