@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { GlossCustomizer } from "../components/GlossCustomizer";
+import { useScrollReveal, useScrollSpy } from "../hooks/use-scroll-reveal";
 import lookbook1 from "../assets/lookbook-1.jpg";
 import lookbook2 from "../assets/lookbook-2.jpg";
 import lookbook3 from "../assets/lookbook-3.jpg";
@@ -28,27 +30,103 @@ const LOOKBOOK = [
   { src: lookbook4, alt: "Lip color swatches on skin", delay: 400, mt: "mt-12" },
 ];
 
-function Nav() {
+const NAV_SECTIONS = ["ritual", "customize", "lookbook"];
+
+function RevealSection({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const { ref, visible } = useScrollReveal(0.1);
   return (
-    <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border px-6 md:px-8 py-4 flex justify-between items-center">
-      <div className="font-serif text-2xl font-black tracking-tight italic">BKEUT&amp;Co.</div>
-      <div className="hidden md:flex gap-8 text-xs uppercase tracking-[0.2em] font-semibold">
-        <a href="#customize" className="hover:text-accent transition-colors">
-          The Studio
-        </a>
-        <a href="#occasions" className="hover:text-accent transition-colors">
-          Occasions
-        </a>
-        <a href="#lookbook" className="hover:text-accent transition-colors">
-          Lookbook
-        </a>
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"} ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
+
+function Nav() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const active = useScrollSpy(NAV_SECTIONS);
+
+  const linkClass = (id: string) =>
+    `hover:text-accent transition-colors ${active === id ? "text-accent" : ""}`;
+
+  return (
+    <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border px-6 md:px-8 py-4">
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
+        <div className="font-serif text-2xl font-black tracking-tight italic">BKEUT&amp;Co.</div>
+
+        <div className="hidden md:flex gap-8 text-xs uppercase tracking-[0.2em] font-semibold">
+          <a href="#ritual" className={linkClass("ritual")}>
+            How It Works
+          </a>
+          <a href="#customize" className={linkClass("customize")}>
+            The Studio
+          </a>
+          <a href="#lookbook" className={linkClass("lookbook")}>
+            Lookbook
+          </a>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <a
+            href="#customize"
+            className="hidden md:inline text-xs font-semibold border-b-2 border-foreground uppercase tracking-widest pb-0.5"
+          >
+            Start
+          </a>
+          <button
+            onClick={() => setMobileOpen((v) => !v)}
+            className="md:hidden size-8 flex items-center justify-center"
+            aria-label="Toggle navigation"
+          >
+            <span
+              className={`block w-5 h-0.5 bg-foreground transition-all ${mobileOpen ? "rotate-45 translate-y-0.5" : "-translate-y-1"}`}
+            />
+            <span
+              className={`block w-5 h-0.5 bg-foreground transition-all ${mobileOpen ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`block w-5 h-0.5 bg-foreground transition-all ${mobileOpen ? "-rotate-45 -translate-y-0.5" : "translate-y-1"}`}
+            />
+          </button>
+        </div>
       </div>
-      <a
-        href="#customize"
-        className="text-xs font-semibold border-b-2 border-foreground uppercase tracking-widest pb-0.5"
-      >
-        Start
-      </a>
+
+      {mobileOpen && (
+        <div className="md:hidden mt-4 pb-4 flex flex-col gap-4 text-xs uppercase tracking-[0.2em] font-semibold border-t border-border pt-4">
+          <a href="#ritual" onClick={() => setMobileOpen(false)} className={linkClass("ritual")}>
+            How It Works
+          </a>
+          <a
+            href="#customize"
+            onClick={() => setMobileOpen(false)}
+            className={linkClass("customize")}
+          >
+            The Studio
+          </a>
+          <a
+            href="#lookbook"
+            onClick={() => setMobileOpen(false)}
+            className={linkClass("lookbook")}
+          >
+            Lookbook
+          </a>
+          <a
+            href="#customize"
+            onClick={() => setMobileOpen(false)}
+            className="text-xs font-semibold border-b-2 border-foreground uppercase tracking-widest pb-0.5 self-start"
+          >
+            Start
+          </a>
+        </div>
+      )}
     </nav>
   );
 }
@@ -56,10 +134,7 @@ function Nav() {
 function Marquee() {
   const items = ["Birthdays", "Weddings", "Bridesmaids", "Quotes", "Just Because", "Anniversaries"];
   return (
-    <div
-      id="occasions"
-      className="bg-foreground text-background py-6 overflow-hidden border-y border-accent/20"
-    >
+    <div className="bg-foreground text-background py-6 overflow-hidden border-y border-accent/20">
       <div className="flex gap-24 items-center animate-marquee whitespace-nowrap px-8 w-max">
         {[...items, ...items, ...items].map((label, i) => (
           <span key={i} className="font-serif italic text-2xl flex items-center gap-24">
@@ -81,8 +156,8 @@ function HowItWorks() {
     },
     {
       n: "02",
-      t: "Choose your shade",
-      d: "Eight curated chocolate-to-nude tones — or request a custom pour just for you.",
+      t: "Choose your shade & scent",
+      d: "Eight curated chocolate-to-nude tones, plus your favourite scent. Or request a custom pour.",
     },
     {
       n: "03",
@@ -91,23 +166,25 @@ function HowItWorks() {
     },
   ];
   return (
-    <section className="bg-secondary/40 py-20 md:py-28 px-6 md:px-8">
+    <section id="ritual" className="bg-secondary/40 py-20 md:py-28 px-6 md:px-8">
       <div className="max-w-7xl mx-auto">
-        <p className="text-[11px] uppercase tracking-[0.3em] font-semibold text-muted-foreground mb-4">
-          The Ritual
-        </p>
-        <h2 className="font-serif text-4xl md:text-5xl tracking-tight mb-16 max-w-2xl">
-          Three steps from <span className="italic">idea</span> to labeled keepsake.
-        </h2>
-        <div className="grid md:grid-cols-3 gap-12">
-          {steps.map((s) => (
-            <div key={s.n} className="space-y-3">
-              <span className="font-mono text-xs text-accent">{s.n}</span>
-              <h3 className="font-serif text-2xl">{s.t}</h3>
-              <p className="text-foreground/65 leading-relaxed">{s.d}</p>
-            </div>
-          ))}
-        </div>
+        <RevealSection>
+          <p className="text-[11px] uppercase tracking-[0.3em] font-semibold text-muted-foreground mb-4">
+            The Ritual
+          </p>
+          <h2 className="font-serif text-4xl md:text-5xl tracking-tight mb-16 max-w-2xl">
+            Three steps from <span className="italic">idea</span> to labeled keepsake.
+          </h2>
+          <div className="grid md:grid-cols-3 gap-12">
+            {steps.map((s) => (
+              <div key={s.n} className="space-y-3">
+                <span className="font-mono text-xs text-accent">{s.n}</span>
+                <h3 className="font-serif text-2xl">{s.t}</h3>
+                <p className="text-foreground/65 leading-relaxed">{s.d}</p>
+              </div>
+            ))}
+          </div>
+        </RevealSection>
       </div>
     </section>
   );
@@ -116,35 +193,33 @@ function HowItWorks() {
 function Lookbook() {
   return (
     <section id="lookbook" className="py-20 md:py-28 px-6 md:px-8 max-w-7xl mx-auto">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
-        <h2 className="font-serif text-5xl md:text-6xl tracking-tight">
-          The Muse
-          <br />
-          <span className="italic">Lookbook</span>
-        </h2>
-        <p className="max-w-xs text-sm text-foreground/60 leading-relaxed">
-          Captured by our community. Real shades on real skin, reflecting the light of a thousand
-          moments.
-        </p>
-      </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {LOOKBOOK.map((img) => (
-          <div
-            key={img.src}
-            className={`aspect-[2/3] overflow-hidden rounded-xl animate-reveal ${img.mt}`}
-            style={{ animationDelay: `${img.delay}ms` }}
-          >
-            <img
-              src={img.src}
-              alt={img.alt}
-              width={800}
-              height={1200}
-              loading="lazy"
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-            />
-          </div>
-        ))}
-      </div>
+      <RevealSection>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+          <h2 className="font-serif text-5xl md:text-6xl tracking-tight">
+            The Muse
+            <br />
+            <span className="italic">Lookbook</span>
+          </h2>
+          <p className="max-w-xs text-sm text-foreground/60 leading-relaxed">
+            Captured by our community. Real shades on real skin, reflecting the light of a thousand
+            moments.
+          </p>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {LOOKBOOK.map((img) => (
+            <div key={img.src} className={`aspect-[2/3] overflow-hidden rounded-xl ${img.mt}`}>
+              <img
+                src={img.src}
+                alt={img.alt}
+                width={800}
+                height={1200}
+                loading="lazy"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+          ))}
+        </div>
+      </RevealSection>
     </section>
   );
 }
@@ -170,14 +245,10 @@ function Footer() {
                 </a>
               </li>
               <li>
-                <button className="hover:text-background cursor-pointer bg-transparent border-none p-0 text-sm">
-                  Gift Sets
-                </button>
+                <span className="opacity-40 cursor-default">Gift Sets</span>
               </li>
               <li>
-                <button className="hover:text-background cursor-pointer bg-transparent border-none p-0 text-sm">
-                  Limited Drops
-                </button>
+                <span className="opacity-40 cursor-default">Limited Drops</span>
               </li>
             </ul>
           </div>
@@ -187,19 +258,13 @@ function Footer() {
             </h4>
             <ul className="text-sm space-y-2">
               <li>
-                <button className="hover:text-background cursor-pointer bg-transparent border-none p-0 text-sm">
-                  Shipping
-                </button>
+                <span className="opacity-40 cursor-default">Shipping</span>
               </li>
               <li>
-                <button className="hover:text-background cursor-pointer bg-transparent border-none p-0 text-sm">
-                  Ingredients
-                </button>
+                <span className="opacity-40 cursor-default">Ingredients</span>
               </li>
               <li>
-                <button className="hover:text-background cursor-pointer bg-transparent border-none p-0 text-sm">
-                  Contact
-                </button>
+                <span className="opacity-40 cursor-default">Contact</span>
               </li>
             </ul>
           </div>
@@ -217,9 +282,9 @@ function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
-      <GlossCustomizer />
       <Marquee />
       <HowItWorks />
+      <GlossCustomizer />
       <Lookbook />
       <Footer />
     </div>
