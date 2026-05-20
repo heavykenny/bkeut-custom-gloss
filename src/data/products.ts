@@ -3,8 +3,8 @@ import tubeImage from "../assets/lipgloss-tube.png";
 export type Product = {
   id: string;
   name: string;
-  href: string | null;       // null = coming soon
-  fromPrice: number | null;  // null = not priced yet
+  href: string | null; // null = coming soon
+  fromPrice: number | null; // null = not priced yet
   tagline: string;
   previewImage?: string;
 };

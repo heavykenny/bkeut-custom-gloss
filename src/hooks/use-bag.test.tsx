@@ -3,9 +3,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { BagProvider, useBag, BAG_STORAGE_KEY } from "./use-bag";
 import type { ReactNode } from "react";
 
-const wrapper = ({ children }: { children: ReactNode }) => (
-  <BagProvider>{children}</BagProvider>
-);
+const wrapper = ({ children }: { children: ReactNode }) => <BagProvider>{children}</BagProvider>;
 
 const sampleItem = {
   casingId: "slim",

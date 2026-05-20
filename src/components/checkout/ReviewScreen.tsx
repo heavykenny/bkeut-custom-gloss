@@ -62,12 +62,7 @@ export function ReviewScreen() {
           index={previewIndex}
           onIndexChange={setPreviewIndex}
         />
-        <OrderSummary
-          items={items}
-          subtotal={subtotal}
-          confirmed={confirmed}
-          onPay={handlePay}
-        />
+        <OrderSummary items={items} subtotal={subtotal} confirmed={confirmed} onPay={handlePay} />
       </div>
     </motion.section>
   );

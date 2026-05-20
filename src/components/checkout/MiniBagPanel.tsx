@@ -75,12 +75,7 @@ export function MiniBagPanel({ open, onClose }: Props) {
                 <span className="text-foreground/60">Subtotal</span>
                 <span className="font-mono">£{subtotal.toFixed(2)}</span>
               </div>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={onClose}
-                className="w-full"
-              >
+              <Button type="button" variant="outline" onClick={onClose} className="w-full">
                 Continue customizing
               </Button>
               <Button

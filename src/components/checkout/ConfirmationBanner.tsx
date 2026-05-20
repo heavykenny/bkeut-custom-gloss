@@ -16,7 +16,7 @@ export function ConfirmationBanner({ orderId, items, total }: Props) {
             <span className="text-accent text-lg">✦</span>
           </div>
           <div>
-            <p className="font-serif italic text-lg">Booking received</p>
+            <p className="font-serif text-lg font-semibold">Booking received</p>
             <p className="text-xs text-foreground/50 font-mono tracking-wide">{orderId}</p>
           </div>
         </div>

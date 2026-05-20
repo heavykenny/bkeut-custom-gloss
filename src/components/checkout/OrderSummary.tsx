@@ -24,7 +24,7 @@ export function OrderSummary({ items, subtotal, confirmed, onPay }: Props) {
               </span>
               <span className="font-mono">£{(it.unitPrice * it.qty).toFixed(2)}</span>
             </div>
-            <div className="text-foreground/60 italic font-serif">
+            <div className="font-semibold text-foreground/60">
               “{it.label}” ×{it.qty}
             </div>
           </li>
