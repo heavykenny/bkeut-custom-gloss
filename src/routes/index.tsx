@@ -36,7 +36,7 @@ function Index() {
   const onReview = screen === "review";
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen text-foreground">
       <Nav onOpenBag={() => setBagOpen(true)} />
       <SocialStrip visible={!onReview} />
       <LayoutGroup>
