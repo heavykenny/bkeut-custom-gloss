@@ -12,9 +12,7 @@ export function ShadeSelector({ shades, active, onSelect }: Props) {
     <div>
       <Label className="text-[10px] uppercase tracking-[0.2em] font-bold text-foreground/60 mb-3 block">
         2 · Shade —{" "}
-        <span className="italic font-serif normal-case tracking-normal text-foreground/80">
-          {active.name}
-        </span>
+        <span className="normal-case tracking-normal text-foreground/80">{active.name}</span>
       </Label>
       <div className="flex flex-wrap gap-3">
         {shades.map((s) => {

@@ -20,7 +20,7 @@ export function LabelInput({ value, onChange }: Props) {
           onChange={(e) => onChange(e.target.value.slice(0, MAX_LABEL_CHARS))}
           maxLength={MAX_LABEL_CHARS}
           placeholder="e.g. Evelyn's Glow"
-          className="bg-secondary border-border font-serif italic text-xl h-auto px-4 py-3"
+          className="h-auto rounded-md border-border bg-background/70 px-4 py-3 pr-16 font-sans text-base font-semibold shadow-inner"
         />
         <span
           aria-live="polite"
