@@ -43,7 +43,7 @@ export function MiniBagPanel({ open, onClose }: Props) {
             onClick={onClose}
             className="fixed inset-0 bg-foreground/30 backdrop-blur-sm z-40"
           />
-          <motion.aside
+          <motion.dialog
             key="panel"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
@@ -51,8 +51,7 @@ export function MiniBagPanel({ open, onClose }: Props) {
             transition={TRANSITIONS.panel}
             className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-background border-l border-border z-50 flex flex-col"
             aria-label="Your bag"
-            role="dialog"
-            aria-modal="true"
+            open
           >
             <header className="flex items-center justify-between p-6 border-b border-border">
               <h2 className="font-serif text-xl">Your bag</h2>
@@ -87,7 +86,7 @@ export function MiniBagPanel({ open, onClose }: Props) {
                 Checkout · £{subtotal.toFixed(2)}
               </Button>
             </footer>
-          </motion.aside>
+          </motion.dialog>
         </>
       )}
     </AnimatePresence>

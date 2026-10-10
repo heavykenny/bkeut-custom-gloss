@@ -30,6 +30,53 @@ const ORIENTATION_OPTIONS: readonly {
   { value: "horizontal", label: "Flat lay", icon: RectangleHorizontal },
 ];
 
+type PreviewPanelProps = {
+  casing: (typeof CASINGS)[number];
+  shade: (typeof SHADES)[number];
+  scent: (typeof SCENTS)[number];
+  label: string;
+  orientation: PreviewOrientation;
+  onOrientationChange: (value: PreviewOrientation) => void;
+};
+
+function PreviewPanel({ casing, shade, scent, label, orientation, onOrientationChange }: PreviewPanelProps) {
+  return (
+    <div className="order-1 md:order-2 md:sticky md:top-24">
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/50">Live preview</p>
+        <div className="inline-flex rounded-full border border-border bg-card p-1 shadow-sm">
+          {ORIENTATION_OPTIONS.map(({ value, label: optionLabel, icon: Icon }) => {
+            const active = orientation === value;
+            return (
+              <button
+                key={value}
+                type="button"
+                aria-pressed={active}
+                onClick={() => onOrientationChange(value)}
+                className={`inline-flex h-9 items-center gap-2 rounded-full px-3 text-[11px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                  active
+                    ? "bg-foreground text-background shadow-sm"
+                    : "text-foreground/60 hover:text-foreground"
+                }`}
+              >
+                <Icon className="size-4" />
+                <span>{optionLabel}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+      <TubePreview
+        casing={casing}
+        shade={shade}
+        scent={scent}
+        label={label}
+        orientation={orientation}
+      />
+    </div>
+  );
+}
+
 export function CustomizerScreen({ onAdded }: Props) {
   const [casing, setCasing] = useState(CASINGS[0]);
   const [shade, setShade] = useState(SHADES[0]);
@@ -94,41 +141,14 @@ export function CustomizerScreen({ onAdded }: Props) {
         </motion.div>
       </motion.div>
 
-      <div className="order-1 md:order-2 md:sticky md:top-24">
-        <div className="mb-3 flex items-center justify-between gap-3">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/50">
-            Live preview
-          </p>
-          <div className="inline-flex rounded-full border border-border bg-card p-1 shadow-sm">
-            {ORIENTATION_OPTIONS.map(({ value, label: optionLabel, icon: Icon }) => {
-              const active = orientation === value;
-              return (
-                <button
-                  key={value}
-                  type="button"
-                  aria-pressed={active}
-                  onClick={() => setOrientation(value)}
-                  className={`inline-flex h-9 items-center gap-2 rounded-full px-3 text-[11px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-                    active
-                      ? "bg-foreground text-background shadow-sm"
-                      : "text-foreground/60 hover:text-foreground"
-                  }`}
-                >
-                  <Icon className="size-4" />
-                  <span>{optionLabel}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-        <TubePreview
-          casing={casing}
-          shade={shade}
-          scent={scent}
-          label={label}
-          orientation={orientation}
-        />
-      </div>
+      <PreviewPanel
+        casing={casing}
+        shade={shade}
+        scent={scent}
+        label={label}
+        orientation={orientation}
+        onOrientationChange={setOrientation}
+      />
     </motion.section>
   );
 }

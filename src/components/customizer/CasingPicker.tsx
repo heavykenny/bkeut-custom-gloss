@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react";
 import { motion } from "framer-motion";
 import { TRANSITIONS } from "../../lib/motion";
 import type { Casing } from "../../data/casings";
@@ -9,25 +8,10 @@ type Props = {
   onSelect: (casing: Casing) => void;
 };
 
-function CasingMark({ casingId }: { casingId: string }) {
-  const isRound = casingId === "round";
-  const isFluted = casingId === "fluted";
-
+function CasingMark({ image }: { image: string }) {
   return (
-    <span
-      aria-hidden
-      className="relative h-10 w-4 shrink-0 overflow-hidden rounded-full border border-foreground/18 bg-white/60 shadow-inner"
-    >
-      <span
-        className={`absolute left-1/2 top-0 h-[34%] w-[85%] -translate-x-1/2 rounded-t-full rounded-b-sm ${
-          isRound ? "bg-[#d3a64d]" : "bg-[#d8d6d2]"
-        }`}
-      />
-      <span className="absolute left-1/2 top-[32%] h-[5%] w-full -translate-x-1/2 bg-foreground/20" />
-      <span className="absolute bottom-[6%] left-1/2 h-[56%] w-[66%] -translate-x-1/2 rounded-b-full bg-[var(--preview-shade)]" />
-      {isFluted && (
-        <span className="absolute inset-0 bg-[repeating-linear-gradient(90deg,transparent_0_5px,rgba(255,255,255,0.5)_5px_6px)]" />
-      )}
+    <span className="flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-md border border-foreground/12 bg-white/70 p-1 shadow-inner">
+      <img src={image} alt="" className="h-full w-full object-contain" />
     </span>
   );
 }
@@ -57,9 +41,8 @@ export function CasingPicker({ casings, active, onSelect }: Props) {
                   ? "border-foreground shadow-sm"
                   : "border-border hover:border-foreground/28"
               }`}
-              style={{ "--preview-shade": "#8E533F" } as CSSProperties}
             >
-              <CasingMark casingId={c.id} />
+              <CasingMark image={c.image} />
               <span className="min-w-0">
                 <span className="block text-sm font-semibold leading-tight">{c.name}</span>
                 <span className="mt-1 block truncate text-[11px] leading-tight text-foreground/50">

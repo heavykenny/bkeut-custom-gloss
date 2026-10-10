@@ -7,23 +7,10 @@ type Props = {
   onRemove: (id: string) => void;
 };
 
-function MiniTube({ casingId, shadeHex }: { casingId: string; shadeHex: string }) {
-  const capClass = casingId === "round" ? "bg-[#d3a64d]" : "bg-[#d8d6d2]";
-
+function MiniTube({ image }: { image: string }) {
   return (
-    <span
-      aria-hidden
-      className="relative h-11 w-4 overflow-hidden rounded-full border border-foreground/16 bg-white/70 shadow-inner"
-    >
-      <span
-        className={`absolute left-1/2 top-0 h-[34%] w-[90%] -translate-x-1/2 rounded-t-full rounded-b-sm ${capClass}`}
-      />
-      <span className="absolute left-1/2 top-[32%] h-[5%] w-full -translate-x-1/2 bg-foreground/18" />
-      <span
-        className="absolute bottom-[6%] left-1/2 h-[56%] w-[68%] -translate-x-1/2 rounded-b-full"
-        style={{ backgroundColor: shadeHex }}
-      />
-      <span className="absolute bottom-[26%] left-1/2 h-[18%] w-full -translate-x-1/2 bg-white/85" />
+    <span className="flex size-10 items-center justify-center overflow-hidden rounded-md bg-white/70 p-1 shadow-inner">
+      <img src={image} alt="" className="h-full w-full object-contain" />
     </span>
   );
 }
@@ -33,7 +20,7 @@ export function BagItemRow({ item, onRemove }: Props) {
   return (
     <div className="flex gap-4 items-start">
       <div className="flex size-12 shrink-0 items-center justify-center rounded-md border border-border bg-background/70 shadow-inner">
-        <MiniTube casingId={item.casingId} shadeHex={item.shadeHex} />
+        {casing ? <MiniTube image={casing.image} /> : <span className="text-sm">B</span>}
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-sm">
